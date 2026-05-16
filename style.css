@@ -50,14 +50,15 @@ body {
 
 /* 頁面通用 */
 .page {
-    min-height: 100vh;
+    min-height: calc(100vh - 75px);
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     position: relative;
     z-index: 1;
-    padding: 40px 20px 100px 20px;
+    padding: 40px 20px 20px 20px;
+    box-sizing: border-box;
 }
 
 .hidden {
@@ -809,7 +810,10 @@ body {
     font-variant-numeric: tabular-nums;
 }
 
-/* 為底部播放器留出空間已在 .page 的 padding-bottom 設定 */
+/* 為底部播放器留出空間 */
+.page {
+    padding-bottom: 80px;
+}
 
 /* 通用動畫 */
 @keyframes fadeInUp {
