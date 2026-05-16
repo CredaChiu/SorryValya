@@ -72,6 +72,27 @@ body {
     padding-top: 60px;
 }
 
+.scroll-progress {
+    position: fixed;
+    top: 15px;
+    left: 15px;
+    background: rgba(255, 107, 157, 0.2);
+    border: 1px solid rgba(255, 107, 157, 0.4);
+    border-radius: 20px;
+    padding: 6px 14px;
+    font-size: 0.8rem;
+    color: #ffa8cc;
+    z-index: 998;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    display: none;
+}
+
+.timeline-page:not(.hidden) ~ .scroll-progress,
+.timeline-page:not(.hidden) .scroll-progress {
+    display: block;
+}
+
 .hidden {
     display: none !important;
 }

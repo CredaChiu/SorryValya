@@ -368,3 +368,20 @@ const videoObserver = new IntersectionObserver((entries) => {
 document.querySelectorAll('.timeline-img video').forEach(video => {
     videoObserver.observe(video);
 });
+
+// 時間線頁面滾動進度
+const scrollProgressEl = document.getElementById('scrollProgress');
+
+window.addEventListener('scroll', () => {
+    if (currentPage === 'timelinePage' && scrollProgressEl) {
+        const timelinePage = document.getElementById('timelinePage');
+        const scrollTop = window.scrollY;
+        const pageHeight = timelinePage.scrollHeight - window.innerHeight;
+        const pct = Math.min(100, Math.max(0, Math.round((scrollTop / pageHeight) * 100)));
+        scrollProgressEl.textContent = pct + '%';
+        scrollProgressEl.style.display = 'block';
+    } else if (scrollProgressEl) {
+        scrollProgressEl.style.display = 'none';
+    }
+});
+
