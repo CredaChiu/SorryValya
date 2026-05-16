@@ -735,8 +735,8 @@ body {
 }
 
 .play-btn {
-    width: 36px;
-    height: 36px;
+    width: 50px;
+    height: 50px;
     border-radius: 50%;
     border: 2px solid rgba(255,107,157,0.5);
     background: #111;
@@ -759,10 +759,12 @@ body {
     height: 100%;
     object-fit: cover;
     border-radius: 50%;
+    animation: disc-spin 12s linear infinite;
+    animation-play-state: paused;
 }
 
 .play-btn.playing .play-img {
-    animation: disc-spin 4s linear infinite;
+    animation-play-state: running;
 }
 
 @keyframes disc-spin {
