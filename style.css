@@ -61,7 +61,7 @@ body {
     box-sizing: border-box;
 }
 
-/* 內容超出一屏時改為頂部對齊 */
+/* 內容長的頁面改為頂部對齊 */
 .love-letter-page,
 .timeline-page {
     justify-content: flex-start;
@@ -816,10 +816,7 @@ body {
     font-variant-numeric: tabular-nums;
 }
 
-/* 為底部播放器留出空間 */
-.page {
-    padding-bottom: 80px;
-}
+/* 為底部播放器留出空間已在 .page padding-bottom: 120px 設定 */
 
 /* 通用動畫 */
 @keyframes fadeInUp {
