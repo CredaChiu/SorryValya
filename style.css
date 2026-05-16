@@ -574,7 +574,7 @@ body {
         rgba(180,160,140,0.3) calc(0.95rem * 2.4)
     );
     background-size: 100% calc(0.95rem * 2.4);
-    background-position-y: calc(0.95rem * 1.75);
+    background-position-y: calc(0.95rem * 1.85);
 }
 
 .timeline-letter p {
@@ -863,8 +863,8 @@ body {
     .section-title { font-size: 2rem; }
     .letter-paper { padding: 25px; font-size: 0.95rem; line-height: 2.4em; }
     .letter-paper::before { top: 25px; background-position-y: 0.75em; }
-    .timeline-letter { padding: 25px; }
-    .timeline-letter::before { top: 25px; background-position-y: calc(0.95rem * 1.75); }
+    .timeline-letter { padding: 25px; font-size: 0.95rem; line-height: 2.4em;}
+    .timeline-letter::before { top: 25px; background-position-y: calc(0.95rem * 2); }
     .promises { grid-template-columns: 1fr; }
     .final-content h2 { font-size: 1.8rem; }
     .distance-visual { font-size: 1rem; }
