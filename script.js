@@ -161,7 +161,6 @@ function startJourney() {
 function openLetter() {
     document.getElementById('envelope').classList.add('hidden');
     document.getElementById('letterContent').classList.remove('hidden');
-    document.getElementById('surpriseNote').classList.remove('hidden');
     document.getElementById('letterNext').classList.remove('hidden');
 }
 
