@@ -559,6 +559,20 @@ body {
     font-weight: bold;
 }
 
+.timeline-letter {
+    margin-top: 15px;
+    font-size: 0.95rem;
+    line-height: 2.2em;
+}
+
+.timeline-letter p {
+    color: #4a3728;
+}
+
+.timeline-letter .letter-closing {
+    margin-top: 10px;
+}
+
 /* 承諾頁 */
 .promises {
     display: grid;
