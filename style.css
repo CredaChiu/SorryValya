@@ -75,12 +75,12 @@ body {
 .scroll-progress {
     position: fixed;
     top: 15px;
-    left: 15px;
+    left: 8px;
     background: rgba(255, 107, 157, 0.2);
     border: 1px solid rgba(255, 107, 157, 0.4);
     border-radius: 20px;
-    padding: 6px 14px;
-    font-size: 0.8rem;
+    padding: 5px 10px;
+    font-size: 0.75rem;
     color: #ffa8cc;
     z-index: 998;
     backdrop-filter: blur(10px);
