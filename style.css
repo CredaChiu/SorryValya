@@ -286,7 +286,7 @@ body {
 
 .timeline {
     position: relative;
-    max-width: 700px;
+    max-width: 500px;
     width: 100%;
     padding-left: 40px;
 }
@@ -332,8 +332,8 @@ body {
 .timeline-card {
     background: rgba(255, 255, 255, 0.05);
     border: 1px solid rgba(255, 107, 157, 0.2);
-    border-radius: 16px;
-    padding: 25px;
+    border-radius: 12px;
+    padding: 18px;
     backdrop-filter: blur(10px);
     transition: transform 0.3s;
 }
@@ -344,7 +344,7 @@ body {
 }
 
 .timeline-card h3 {
-    font-size: 1.3rem;
+    font-size: 1.1rem;
     margin-bottom: 5px;
 }
 
