@@ -501,10 +501,10 @@ body {
 .letter-paper {
     background: linear-gradient(to bottom, #fff9f0, #fff5e6);
     color: #4a3728;
-    padding: 40px;
+    padding: 40px 40px 40px 40px;
     border-radius: 10px;
     font-size: 1.05rem;
-    line-height: 2.2;
+    line-height: 2.4em;
     box-shadow: 0 10px 40px rgba(0,0,0,0.3);
     position: relative;
 }
@@ -512,13 +512,18 @@ body {
 .letter-paper::before {
     content: '';
     position: absolute;
-    top: 0;
-    left: 30px;
-    right: 30px;
-    height: 100%;
+    top: 40px;
+    left: 25px;
+    right: 25px;
+    bottom: 0;
     background: repeating-linear-gradient(
-        transparent, transparent 34px, rgba(200,180,160,0.3) 34px, rgba(200,180,160,0.3) 35px
+        to bottom,
+        transparent 0,
+        transparent calc(2.4em - 1px),
+        rgba(180,160,140,0.25) calc(2.4em - 1px),
+        rgba(180,160,140,0.25) 2.4em
     );
+    background-size: 100% 2.4em;
     pointer-events: none;
 }
 
@@ -526,19 +531,20 @@ body {
     font-family: 'Noto Serif TC', serif;
     font-size: 1.5rem;
     color: #c44569;
-    margin-bottom: 15px;
+    margin-bottom: 0;
+    line-height: 2.4em;
 }
 
 .letter-paper p {
-    margin-bottom: 12px;
+    margin-bottom: 0;
     position: relative;
+    line-height: 2.4em;
 }
 
 .letter-closing {
     text-align: right;
     color: #c44569;
     font-weight: bold;
-    margin-top: 20px !important;
 }
 
 /* 承諾頁 */
@@ -818,7 +824,7 @@ body {
     .title-glow { font-size: 2.5rem; }
     .birthday-text h2 { font-size: 2.2rem; }
     .section-title { font-size: 2rem; }
-    .letter-paper { padding: 25px; font-size: 0.95rem; }
+    .letter-paper { padding: 25px; font-size: 0.95rem; line-height: 2.4em; }
     .promises { grid-template-columns: 1fr; }
     .final-content h2 { font-size: 1.8rem; }
     .distance-visual { font-size: 1rem; }
