@@ -834,6 +834,7 @@ body {
     .birthday-text h2 { font-size: 2.2rem; }
     .section-title { font-size: 2rem; }
     .letter-paper { padding: 25px; font-size: 0.95rem; line-height: 2.4em; }
+    .letter-paper::before { top: 25px; background-position-y: 0.75em; }
     .promises { grid-template-columns: 1fr; }
     .final-content h2 { font-size: 1.8rem; }
     .distance-visual { font-size: 1rem; }
