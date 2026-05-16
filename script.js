@@ -65,16 +65,45 @@ function calcDays() {
 }
 
 // 頁面切換
-function showPage(pageId) {
+function showPage(pageId, pushState = true) {
     document.querySelectorAll('.page').forEach(p => p.classList.add('hidden'));
     const target = document.getElementById(pageId);
     target.classList.remove('hidden');
     target.style.animation = 'fadeInUp 0.8s ease';
     window.scrollTo({ top: 0, behavior: 'smooth' });
 
+    // 記錄瀏覽器歷史，防止手機返回鍵回到第一頁
+    if (pushState) {
+        history.pushState({ page: pageId }, '', '#' + pageId);
+    }
+
     if (pageId === 'timelinePage') calcDays();
     if (pageId === 'finalPage') launchFireworks();
 }
+
+// 處理瀏覽器返回鍵
+window.addEventListener('popstate', function(e) {
+    if (e.state && e.state.page) {
+        showPage(e.state.page, false);
+    } else {
+        // 返回到第一頁
+        showPage('loveLetterPage', false);
+    }
+});
+
+// 頁面載入時檢查 hash，恢復頁面狀態
+window.addEventListener('DOMContentLoaded', function() {
+    const hash = window.location.hash.replace('#', '');
+    if (hash && document.getElementById(hash)) {
+        showPage(hash, false);
+        // 如果是情書頁，自動展開信件
+        if (hash === 'loveLetterPage') {
+            openLetter();
+        }
+    } else {
+        history.replaceState({ page: 'loveLetterPage' }, '', '#loveLetterPage');
+    }
+});
 
 function startJourney() {
     showPage('loveLetterPage');
