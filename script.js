@@ -2,12 +2,14 @@
 const canvas = document.getElementById('starCanvas');
 const ctx = canvas.getContext('2d');
 let stars = [];
+let starAnimId = null;
 
 function initStars() {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
     stars = [];
-    for (let i = 0; i < 150; i++) {
+    const count = window.innerWidth < 768 ? 60 : 150;
+    for (let i = 0; i < count; i++) {
         stars.push({
             x: Math.random() * canvas.width,
             y: Math.random() * canvas.height,
@@ -28,7 +30,21 @@ function drawStars() {
         ctx.fillStyle = `rgba(255, 255, 255, ${s.opacity})`;
         ctx.fill();
     });
-    requestAnimationFrame(drawStars);
+    starAnimId = requestAnimationFrame(drawStars);
+}
+
+function startStars() {
+    if (!starAnimId) {
+        starAnimId = requestAnimationFrame(drawStars);
+    }
+}
+
+function stopStars() {
+    if (starAnimId) {
+        cancelAnimationFrame(starAnimId);
+        starAnimId = null;
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+    }
 }
 
 initStars();
@@ -36,18 +52,39 @@ drawStars();
 window.addEventListener('resize', initStars);
 
 // 花瓣飄落
+let petalInterval = null;
+let currentPage = 'loveLetterPage';
+
 function createPetal() {
+    const container = document.getElementById('petals');
+    // 限制同時存在的花瓣數量
+    if (container.children.length > 8) return;
     const petal = document.createElement('div');
     petal.className = 'petal';
     petal.textContent = ['🌸', '💗', '✨', '🩷', '💮'][Math.floor(Math.random() * 5)];
     petal.style.left = Math.random() * 100 + 'vw';
     petal.style.fontSize = (Math.random() * 15 + 12) + 'px';
     petal.style.animationDuration = (Math.random() * 4 + 5) + 's';
-    document.getElementById('petals').appendChild(petal);
+    container.appendChild(petal);
     setTimeout(() => petal.remove(), 9000);
 }
 
-setInterval(createPetal, 600);
+function startPetals() {
+    if (!petalInterval) {
+        petalInterval = setInterval(createPetal, 800);
+    }
+}
+
+function stopPetals() {
+    if (petalInterval) {
+        clearInterval(petalInterval);
+        petalInterval = null;
+    }
+    // 清除現有花瓣
+    document.getElementById('petals').innerHTML = '';
+}
+
+startPetals();
 
 // 計算在一起的天數
 function calcDays() {
@@ -69,15 +106,26 @@ function showPage(pageId, pushState = true) {
     document.querySelectorAll('.page').forEach(p => p.classList.add('hidden'));
     const target = document.getElementById(pageId);
     target.classList.remove('hidden');
-    target.style.animation = 'fadeInUp 0.8s ease';
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    currentPage = pageId;
+
+    // 立即跳到頂部，不用 smooth（smooth 在手機上會與圖片加載衝突導致跳動）
+    window.scrollTo(0, 0);
+
+    // 時間線頁面關閉花瓣和星空動畫以節省手機性能
+    if (pageId === 'timelinePage') {
+        stopPetals();
+        stopStars();
+        calcDays();
+    } else {
+        startPetals();
+        startStars();
+    }
 
     // 記錄瀏覽器歷史，防止手機返回鍵回到第一頁
     if (pushState) {
         history.pushState({ page: pageId }, '', '#' + pageId);
     }
 
-    if (pageId === 'timelinePage') calcDays();
     if (pageId === 'finalPage') launchFireworks();
 }
 
