@@ -1,0 +1,11 @@
+.idea/
+SorryValya.iml
+node_modules/
+images_original/
+images_compressed/
+compress.js
+fix_refs.js
+deploy.bat
+package.json
+package-lock.json
+
