@@ -695,9 +695,17 @@ body {
     width: 100%;
     overflow: hidden;
     text-align: center;
-    height: 24px;
-    line-height: 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
     margin-bottom: 4px;
+}
+
+.lyric-title {
+    color: rgba(255,180,200,0.5);
+    font-size: 0.7rem;
+    letter-spacing: 1px;
 }
 
 .lyric-text {
@@ -707,6 +715,8 @@ body {
     white-space: nowrap;
     letter-spacing: 0.5px;
     transition: opacity 0.4s;
+    height: 22px;
+    line-height: 22px;
 }
 
 .lyric-text.scrolling {
