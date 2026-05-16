@@ -562,23 +562,24 @@ body {
 .timeline-letter {
     margin-top: 15px;
     font-size: 0.95rem;
-    line-height: 2.2em;
+    line-height: 2.4em;
 }
 
 .timeline-letter::before {
     background-image: repeating-linear-gradient(
         to bottom,
         transparent 0,
-        transparent calc(2.2em - 1px),
-        rgba(180,160,140,0.3) calc(2.2em - 1px),
-        rgba(180,160,140,0.3) 2.2em
+        transparent calc(2.4em - 1px),
+        rgba(180,160,140,0.3) calc(2.4em - 1px),
+        rgba(180,160,140,0.3) 2.4em
     );
-    background-size: 100% 2.2em;
-    background-position-y: 1.55em;
+    background-size: 100% 2.4em;
+    background-position-y: 1.9em;
 }
 
 .timeline-letter p {
     color: #4a3728;
+    line-height: 2.4em;
 }
 
 .timeline-letter .letter-closing {
