@@ -162,6 +162,7 @@ function openLetter() {
     document.getElementById('envelope').classList.add('hidden');
     document.getElementById('letterContent').classList.remove('hidden');
     document.getElementById('letterNext').classList.remove('hidden');
+    document.getElementById('loveLetterPage').classList.add('letter-opened');
 }
 
 // 煙花效果

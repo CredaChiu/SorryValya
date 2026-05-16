@@ -62,8 +62,12 @@ body {
 }
 
 /* 內容長的頁面改為頂部對齊 */
-.love-letter-page,
 .timeline-page {
+    justify-content: flex-start;
+    padding-top: 60px;
+}
+
+.love-letter-page.letter-opened {
     justify-content: flex-start;
     padding-top: 60px;
 }
