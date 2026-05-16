@@ -358,14 +358,13 @@ body {
     margin: 12px 0;
     border-radius: 12px;
     overflow: hidden;
-    min-height: 80px;
     background: rgba(255,255,255,0.03);
 }
 
 .timeline-img img {
     width: 100%;
-    max-height: 350px;
-    object-fit: contain;
+    max-height: 500px;
+    object-fit: cover;
     border-radius: 12px;
     display: block;
 }
