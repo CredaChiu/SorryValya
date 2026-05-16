@@ -353,3 +353,18 @@ function seekMusic(e) {
     }
 }
 
+// 手機端視頻自動播放：當視頻進入視窗時手動觸發 play()
+const videoObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        const video = entry.target;
+        if (entry.isIntersecting) {
+            video.play().catch(() => {});
+        } else {
+            video.pause();
+        }
+    });
+}, { threshold: 0.3 });
+
+document.querySelectorAll('.timeline-img video').forEach(video => {
+    videoObserver.observe(video);
+});
