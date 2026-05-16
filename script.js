@@ -264,18 +264,40 @@ const lyrics = [
     [218.93, '讓那時間每一刻在倒退'],
     [223.16, '生命中有萬事的可能'],
     [228.28, '你就是我要遇見的 特別的人 ❤️'],
-    [237.5, '🎵 — 給我最特別的你 —'],
+    [237.5, '🎵 — 給最特別的你 —'],
 ];
 
 let currentLyricIndex = 0;
+
+// 自動播放音樂（循環）
+audio.loop = true;
+
+function tryAutoPlay() {
+    audio.play().then(() => {
+        playBtn.textContent = '⏸';
+        playBtn.classList.add('playing');
+    }).catch(() => {
+        // 瀏覽器阻止自動播放，等用戶任意點擊後再播放
+        const handler = () => {
+            audio.play().then(() => {
+                playBtn.textContent = '⏸';
+                playBtn.classList.add('playing');
+            });
+            document.removeEventListener('click', handler);
+            document.removeEventListener('touchstart', handler);
+        };
+        document.addEventListener('click', handler);
+        document.addEventListener('touchstart', handler);
+    });
+}
+
+tryAutoPlay();
 
 function toggleMusic() {
     if (audio.paused) {
         audio.play().then(() => {
             playBtn.textContent = '⏸';
             playBtn.classList.add('playing');
-        }).catch(e => {
-            lyricText.textContent = '⚠️ 請先放入音樂檔案到 music/song.mp3';
         });
     } else {
         audio.pause();
@@ -324,13 +346,12 @@ function updateLyric(time) {
     }
 }
 
-audio.addEventListener('ended', () => {
-    playBtn.textContent = '▶';
-    playBtn.classList.remove('playing');
-    progressFill.style.width = '0%';
-    timeDisplay.textContent = '0:00';
-    currentLyricIndex = 0;
-    lyricText.textContent = '🎵 播放結束，點擊重新播放';
+// 循環播放時重置歌詞
+audio.addEventListener('seeking', () => {
+    if (audio.currentTime < 1) {
+        currentLyricIndex = 0;
+        lyricText.textContent = lyrics[0][1];
+    }
 });
 
 function seekMusic(e) {
