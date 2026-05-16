@@ -520,10 +520,11 @@ body {
         to bottom,
         transparent 0,
         transparent calc(2.4em - 1px),
-        rgba(180,160,140,0.25) calc(2.4em - 1px),
-        rgba(180,160,140,0.25) 2.4em
+        rgba(180,160,140,0.3) calc(2.4em - 1px),
+        rgba(180,160,140,0.3) 2.4em
     );
     background-size: 100% 2.4em;
+    background-position-y: 0.35em;
     pointer-events: none;
 }
 
