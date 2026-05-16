@@ -316,8 +316,10 @@ audio.addEventListener('timeupdate', () => {
     }
 });
 
+let lyricTransitioning = false;
+
 function updateLyric(time) {
-    if (lyrics.length === 0) return;
+    if (lyrics.length === 0 || lyricTransitioning) return;
     let idx = 0;
     for (let i = lyrics.length - 1; i >= 0; i--) {
         if (time >= lyrics[i][0]) {
@@ -327,17 +329,22 @@ function updateLyric(time) {
     }
     if (idx !== currentLyricIndex) {
         currentLyricIndex = idx;
+        lyricTransitioning = true;
+        // 先淡出
         lyricText.style.opacity = '0';
+        // 等淡出完成後再換文字並淡入
         setTimeout(() => {
             lyricText.textContent = lyrics[idx][1];
+            lyricText.classList.remove('scrolling');
+            // 強制重排後再淡入
+            void lyricText.offsetWidth;
             lyricText.style.opacity = '1';
             // 如果歌詞太長就滾動
             if (lyricText.scrollWidth > lyricText.parentElement.clientWidth) {
                 lyricText.classList.add('scrolling');
-            } else {
-                lyricText.classList.remove('scrolling');
             }
-        }, 200);
+            lyricTransitioning = false;
+        }, 350);
     }
 }
 
