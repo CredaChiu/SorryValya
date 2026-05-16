@@ -676,34 +676,116 @@ body {
 }
 
 /* 音樂按鈕 */
-.music-btn {
+/* 底部音樂播放器 */
+.music-player {
     position: fixed;
-    bottom: 20px;
-    right: 20px;
-    width: 50px;
-    height: 50px;
-    background: rgba(255, 107, 157, 0.3);
-    border: 1px solid rgba(255, 107, 157, 0.5);
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: linear-gradient(180deg, rgba(10,10,26,0.85) 0%, rgba(10,10,26,0.98) 100%);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border-top: 1px solid rgba(255,107,157,0.2);
+    padding: 6px 15px 10px;
+    z-index: 1000;
+    box-sizing: border-box;
+}
+
+.lyrics-scroll {
+    width: 100%;
+    overflow: hidden;
+    text-align: center;
+    height: 24px;
+    line-height: 24px;
+    margin-bottom: 4px;
+}
+
+.lyric-text {
+    display: inline-block;
+    color: rgba(255,200,220,0.9);
+    font-size: 0.85rem;
+    white-space: nowrap;
+    letter-spacing: 0.5px;
+    transition: opacity 0.4s;
+}
+
+.lyric-text.scrolling {
+    animation: lyricScroll 8s linear infinite;
+}
+
+@keyframes lyricScroll {
+    0% { transform: translateX(100%); }
+    100% { transform: translateX(-100%); }
+}
+
+.player-controls {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.play-btn {
+    width: 32px;
+    height: 32px;
     border-radius: 50%;
+    border: 1.5px solid rgba(255,107,157,0.6);
+    background: rgba(255,107,157,0.15);
+    color: #ff9ec5;
+    font-size: 12px;
+    cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.5rem;
-    cursor: pointer;
-    z-index: 1000;
-    transition: transform 0.3s;
+    flex-shrink: 0;
+    transition: background 0.3s, transform 0.2s;
+    padding: 0;
+    line-height: 1;
 }
 
-.music-btn:hover {
+.play-btn:hover {
+    background: rgba(255,107,157,0.3);
     transform: scale(1.1);
 }
 
-.music-btn.playing {
-    animation: spin 3s linear infinite;
+.play-btn.playing {
+    animation: glow-pulse 2s ease-in-out infinite;
 }
 
-@keyframes spin {
-    to { transform: rotate(360deg); }
+@keyframes glow-pulse {
+    0%, 100% { box-shadow: 0 0 5px rgba(255,107,157,0.3); }
+    50% { box-shadow: 0 0 15px rgba(255,107,157,0.6); }
+}
+
+.progress-bar {
+    flex: 1;
+    height: 4px;
+    background: rgba(255,255,255,0.12);
+    border-radius: 2px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #ff6b9d, #ffa8cc);
+    border-radius: 2px;
+    width: 0%;
+    transition: width 0.3s linear;
+}
+
+.time-display {
+    color: rgba(255,200,220,0.7);
+    font-size: 0.75rem;
+    min-width: 35px;
+    text-align: right;
+    flex-shrink: 0;
+    font-variant-numeric: tabular-nums;
+}
+
+/* 為底部播放器留出空間 */
+.page {
+    padding-bottom: 80px;
 }
 
 /* 通用動畫 */

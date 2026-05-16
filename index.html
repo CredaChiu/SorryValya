@@ -701,9 +701,19 @@
         </div>
     </section>
 
-    <!-- 背景音樂按鈕 -->
-    <div class="music-btn" id="musicBtn" onclick="toggleMusic()">
-        🎵
+    <!-- 底部音樂播放器 -->
+    <div class="music-player" id="musicPlayer">
+        <div class="lyrics-scroll" id="lyricsScroll">
+            <span class="lyric-text" id="lyricText">點擊播放鍵開始播放音樂 🎵</span>
+        </div>
+        <div class="player-controls">
+            <button class="play-btn" id="playBtn" onclick="toggleMusic()">▶</button>
+            <div class="progress-bar" id="progressBar" onclick="seekMusic(event)">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+            <span class="time-display" id="timeDisplay">0:00</span>
+        </div>
+        <audio id="bgMusic" src="music/song.mp3" preload="auto"></audio>
     </div>
 
     <script src="script.js"></script>

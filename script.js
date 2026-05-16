@@ -205,11 +205,95 @@ function createFirework() {
     }
 }
 
-// 音樂（佔位）
-let musicPlaying = false;
+// 音樂播放器 & 歌詞
+const audio = document.getElementById('bgMusic');
+const playBtn = document.getElementById('playBtn');
+const progressFill = document.getElementById('progressFill');
+const timeDisplay = document.getElementById('timeDisplay');
+const lyricText = document.getElementById('lyricText');
+
+// 歌詞配置 [時間(秒), 歌詞]
+// 請替換成你想要的歌曲歌詞，時間對應歌曲播放時間
+const lyrics = [
+    [0, '🎵 點擊播放鍵開始播放音樂'],
+    [5, '♫ 等待歌曲載入中...'],
+    // 在這裡添加歌詞，格式：[秒數, '歌詞內容']
+    // 例如：
+    // [10, '第一句歌詞'],
+    // [15, '第二句歌詞'],
+];
+
+let currentLyricIndex = 0;
+
 function toggleMusic() {
-    const btn = document.getElementById('musicBtn');
-    musicPlaying = !musicPlaying;
-    btn.classList.toggle('playing', musicPlaying);
+    if (audio.paused) {
+        audio.play().then(() => {
+            playBtn.textContent = '⏸';
+            playBtn.classList.add('playing');
+        }).catch(e => {
+            lyricText.textContent = '⚠️ 請先放入音樂檔案到 music/song.mp3';
+        });
+    } else {
+        audio.pause();
+        playBtn.textContent = '▶';
+        playBtn.classList.remove('playing');
+    }
+}
+
+// 更新進度條和歌詞
+audio.addEventListener('timeupdate', () => {
+    if (audio.duration) {
+        const pct = (audio.currentTime / audio.duration) * 100;
+        progressFill.style.width = pct + '%';
+
+        const min = Math.floor(audio.currentTime / 60);
+        const sec = Math.floor(audio.currentTime % 60);
+        timeDisplay.textContent = `${min}:${sec.toString().padStart(2, '0')}`;
+
+        // 同步歌詞
+        updateLyric(audio.currentTime);
+    }
+});
+
+function updateLyric(time) {
+    if (lyrics.length === 0) return;
+    let idx = 0;
+    for (let i = lyrics.length - 1; i >= 0; i--) {
+        if (time >= lyrics[i][0]) {
+            idx = i;
+            break;
+        }
+    }
+    if (idx !== currentLyricIndex) {
+        currentLyricIndex = idx;
+        lyricText.style.opacity = '0';
+        setTimeout(() => {
+            lyricText.textContent = lyrics[idx][1];
+            lyricText.style.opacity = '1';
+            // 如果歌詞太長就滾動
+            if (lyricText.scrollWidth > lyricText.parentElement.clientWidth) {
+                lyricText.classList.add('scrolling');
+            } else {
+                lyricText.classList.remove('scrolling');
+            }
+        }, 200);
+    }
+}
+
+audio.addEventListener('ended', () => {
+    playBtn.textContent = '▶';
+    playBtn.classList.remove('playing');
+    progressFill.style.width = '0%';
+    timeDisplay.textContent = '0:00';
+    currentLyricIndex = 0;
+    lyricText.textContent = '🎵 播放結束，點擊重新播放';
+});
+
+function seekMusic(e) {
+    if (audio.duration) {
+        const rect = e.currentTarget.getBoundingClientRect();
+        const pct = (e.clientX - rect.left) / rect.width;
+        audio.currentTime = pct * audio.duration;
+    }
 }
 
