@@ -584,7 +584,7 @@ body {
 
 .timeline-letter .letter-closing {
     margin-top: 0;
-    color: #ff6b9d;
+    color: #ff6b9d !important;
 }
 
 /* 承諾頁 */
