@@ -565,6 +565,18 @@ body {
     line-height: 2.2em;
 }
 
+.timeline-letter::before {
+    background-image: repeating-linear-gradient(
+        to bottom,
+        transparent 0,
+        transparent calc(2.2em - 1px),
+        rgba(180,160,140,0.3) calc(2.2em - 1px),
+        rgba(180,160,140,0.3) 2.2em
+    );
+    background-size: 100% 2.2em;
+    background-position-y: 0.75em;
+}
+
 .timeline-letter p {
     color: #4a3728;
 }
