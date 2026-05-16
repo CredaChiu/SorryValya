@@ -223,7 +223,11 @@ body {
 
 /* 按鈕 */
 .btn-next {
-    background: rgba(255, 107, 157, 0.2);
+    position: fixed;
+    bottom: 80px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(255, 107, 157, 0.25);
     border: 1px solid rgba(255, 107, 157, 0.5);
     padding: 12px 36px;
     font-size: 1rem;
@@ -231,14 +235,14 @@ body {
     border-radius: 30px;
     cursor: pointer;
     font-family: inherit;
-    margin-top: 40px;
-    margin-bottom: 80px;
     transition: all 0.3s;
+    z-index: 999;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
 }
 
 .btn-next:hover {
     background: rgba(255, 107, 157, 0.4);
-    transform: translateY(-2px);
 }
 
 /* 時間線 */
