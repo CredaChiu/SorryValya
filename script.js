@@ -274,13 +274,10 @@ audio.loop = true;
 
 function tryAutoPlay() {
     audio.play().then(() => {
-        playBtn.textContent = '⏸';
         playBtn.classList.add('playing');
     }).catch(() => {
-        // 瀏覽器阻止自動播放，等用戶任意點擊後再播放
         const handler = () => {
             audio.play().then(() => {
-                playBtn.textContent = '⏸';
                 playBtn.classList.add('playing');
             });
             document.removeEventListener('click', handler);
@@ -296,12 +293,10 @@ tryAutoPlay();
 function toggleMusic() {
     if (audio.paused) {
         audio.play().then(() => {
-            playBtn.textContent = '⏸';
             playBtn.classList.add('playing');
         });
     } else {
         audio.pause();
-        playBtn.textContent = '▶';
         playBtn.classList.remove('playing');
     }
 }

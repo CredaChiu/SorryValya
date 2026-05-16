@@ -735,35 +735,43 @@ body {
 }
 
 .play-btn {
-    width: 32px;
-    height: 32px;
+    width: 36px;
+    height: 36px;
     border-radius: 50%;
-    border: 1.5px solid rgba(255,107,157,0.6);
-    background: rgba(255,107,157,0.15);
-    color: #ff9ec5;
-    font-size: 12px;
+    border: 2px solid rgba(255,107,157,0.5);
+    background: #111;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
-    transition: background 0.3s, transform 0.2s;
     padding: 0;
-    line-height: 1;
+    overflow: hidden;
+    transition: box-shadow 0.3s;
 }
 
 .play-btn:hover {
-    background: rgba(255,107,157,0.3);
-    transform: scale(1.1);
+    box-shadow: 0 0 10px rgba(255,107,157,0.4);
+}
+
+.play-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.play-btn.playing .play-img {
+    animation: disc-spin 4s linear infinite;
+}
+
+@keyframes disc-spin {
+    to { transform: rotate(360deg); }
 }
 
 .play-btn.playing {
-    animation: glow-pulse 2s ease-in-out infinite;
-}
-
-@keyframes glow-pulse {
-    0%, 100% { box-shadow: 0 0 5px rgba(255,107,157,0.3); }
-    50% { box-shadow: 0 0 15px rgba(255,107,157,0.6); }
+    border-color: rgba(255,107,157,0.8);
+    box-shadow: 0 0 12px rgba(255,107,157,0.4);
 }
 
 .progress-bar {
