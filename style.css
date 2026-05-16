@@ -714,7 +714,6 @@ body {
     font-size: 0.85rem;
     white-space: nowrap;
     letter-spacing: 0.5px;
-    transition: opacity 0.3s ease;
     height: 22px;
     line-height: 22px;
 }
